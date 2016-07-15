@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="jquery-1.12.0.min.js"></script>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .header{
+            width: 100%;
+            border-bottom:1px solid darkgrey;
+        }
+        .pic{
+            width: 100%;
+            height: 150px;
+        }
+        .pic img{
+            width: 100%;
+            height: 100%;
+        }
+        .size{
+            position: absolute;
+            top:130px;
+        }
+        .txt{
+            padding-bottom: 25px;
+            padding-top: 10px;
+            padding-left: 20px;
+        }
+        .txt p{
+            margin-top: 10px;
+        }
+        .content{
+            position: relative;
+            width: 100%;
+            /*height: 200px;*/
+            margin: 0 auto;
+            border-bottom: 1px solid #DADADA;
+        }
+        .content .top div{
+            float: left;
+            width: 42%;
+            height: 50%;
+            padding-top: 30px;
+        }
+        .content:before{
+            content: "";
+            width: 1px;
+            height: 50px;
+            color: #9E9E9E;
+            background-color: #9E9E9E;
+            position: absolute;
+            top: 20px;
+            left: 48%;
+        }
+        .bottom{
+            border-bottom: 1px solid #DADADA;
+            height: 115px;
+        }
+        .bottom div{
+            padding-left: 20px;
+            float: left;
+            width: 28%;
+            height: 100%;
+            padding-top: 30px;
+        }
+        .togglecontent{
+            border-bottom: 1px solid #DADADA;
+            height: 115px;
+        }
+        .togglecontent div{
+            padding-left: 20px;
+            float: left;
+            width: 28%;
+            height: 100%;
+            padding-top: 30px;
+        }
+        .top{
+            width: 100%;
+            height: 85px;
+            border-bottom: 1px solid #DADADA;
+        }
+        .top div{
+            margin-left: 20px;
+        }
+        .toggle{
+            text-align: center;
+        }
+        .toggletotal{
+            display: none;
+        }
+        .txtcontent p{
+            width: 95%;
+            line-height: 45px;
+            border-bottom: 1px solid rgb(231, 226, 226);
+            color: rgb(168, 161, 161);
+            margin-left: 5%;
+        }
+        .txtcontent{
+            margin-top: 20px;
+        }
+        .txtcontent span{
+            margin-left: 10px;
+            color: black;
+        }
+        .tip{
+            font-size: 10px;
+            float: right;
+            width: 25%;
+            height: 17px;
+            background-color: rgb(255, 184, 0);
+            text-align: center;
+            color: white;
+        }
+        .update{
+            margin-right: 3%;
+            float: right;
+            display: block;
+            width: 60px;
+            height: 28px;
+            margin-top: 8px;
+            background: #fff;
+            border: 1px solid #2196f3;
+            /* border-radius: 10px;*/
+            text-align: center;
+            font-size: 14px;
+            color: #fff;
+            background-color: #2196f3;
+            -webkit-appearance: none
+        }
+        #bg{
+            background-color: #666;
+            position: absolute;
+            z-index: 99;
+            left: 0;
+            top: 0;
+            display: none;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+        }
+        .inputdiv{
+            width:100%;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .inputcost{
+            padding-left: 10px;
+            font-size: 14px;
+            width: 91%;
+            height: 30px;
+        }
+        .inputdiv span{
+            right: 10%;
+            top: 85px;
+            position: absolute;
+        }
+        .buttongroup{
+            margin-bottom: 10px;
+            width: 100%;
+            margin-top: 25px;
+            text-align: center;
+        }
+        .cancel{
+            color: grey;
+            font-size: 16px;
+            width:40%;
+            height:35px;
+            background-color: transparent;
+            border: none;
+            border: 1px solid #DADADA;
+            background-color: #E7E7E7;
+        }
+        .confirm,.confirm2{
+            color:white;
+            font-size: 16px;
+            width:40%;
+            height:35px;
+            background-color: transparent;
+            border: none;
+            border: 1px solid #2196f3;
+            background-color: #2196f3;
+        }
+        .box,.box2{border-radius: 6px;position:absolute;width:96%;height:auto;z-index:100;background-color:#fff;border:1px #ddd solid;padding:1px;margin-left: 1.5%;}
+        .box h2{height:25px;font-size:17px;position:relative;padding-left:10px;line-height:25px;text-align: center;}
+        .box2 h2{height:25px;font-size:17px;position:relative;padding-left:10px;line-height:25px;text-align: center;}
+        .box h2 a{position:absolute;right:5px;font-size:12px;color:#fff;}
+        .box p{text-align: center;color: #ADA9A9;margin-top: 5px;}
+        .box2 p{text-align: center;color: #ADA9A9;margin-top: 5px;}
+        a {
+            color: #333;
+            cursor: pointer;
+            outline: none;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div id="bg"></div>
+<div class="box" style="display:none">
+    <h2>修改出价</h2>
+    <p>您的当前出价为<span class="limitdaycost2"></span>￥0.77元</p>
+    <p>出价范围在0.10~100元</p>
+    <div class="inputdiv"><input type="text" placeholder="输入金额" class="inputcost"><span>元</span></div>
+    <div class="buttongroup">
+        <button class="cancel">取消</button>
+        <button class="confirm">确定</button>
+    </div>
+</div>
+    <div>
+        <div class="header">
+            <div class="pic">
+                <img src="#">
+                <span class="size">0x0</span>
+            </div>
+            <div class="txt">
+                <p>劳动节免费吃-测试</p>
+                <p>ID：17497623</p>
+            </div>
+        </div>
+        <div class="content">
+            <div class="top">
+                <p class="tip">截止至16：29</p>
+                <div>
+                    <h3>0</h3>
+                    <p>曝光量（次）</p>
+                </div>
+                <div>
+                    <h3>0</h3>
+                    <p>今日消费（元）</p>
+                </div>
+            </div>
+            <div class="bottom">
+                <div>
+                    <h3>0</h3>
+                    <p>点击量（次）</p>
+                </div>
+                <div>
+                    <h3>0</h3>
+                    <p>点击率</p>
+                </div>
+                <div>
+                    <h3>0</h3>
+                    <p>点击均价（元）</p>
+                </div>
+            </div>
+            <div class="toggletotal">
+                <div class="togglecontent">
+                    <div>
+                        <h3>0</h3>
+                        <p>下载量（次）</p>
+                    </div>
+                    <div>
+                        <h3>0</h3>
+                        <p>下载率</p>
+                    </div>
+                    <div>
+                        <h3>0</h3>
+                        <p>下载均价（元）</p>
+                    </div>
+                </div>
+                <div class="togglecontent">
+                    <div>
+                        <h3>0</h3>
+                        <p>安装/转化量（次）</p>
+                    </div>
+                    <div>
+                        <h3>0</h3>
+                        <p>安装/转化率</p>
+                    </div>
+                    <div>
+                        <h3>0</h3>
+                        <p>安装/转化均价（元）</p>
+                    </div>
+                </div>
+            </div>
+            <div class="toggle">
+                <p class="clicktoggle" style="margin-bottom: 15px;position: relative;
+  top: 7px;">点击展开</p>
+            </div>
+
+    </div>
+        <div class="txtcontent">
+            <a href="date.html"><p>投放日期:<span>2017-03-30至（长期投放）</span></p></a>
+            <p>广告出价:￥<span>0.77</span><input type="button" value="修改" class="update"></p>
+            <P>广告状态:<span>审核不通过</span></P>
+        </div>
+        <div class="txtcontent">
+            <p>推广计划:<span>哈根达斯-测试</span></p>
+            <p>投放时间:<span>全部时间点</span></p>
+            <p>投放平台:<span>腾讯网</span></p>
+            <p>投放规格:<span>0x0</span></p>
+        </div>
+        </div>
+</body>
+<script>
+    $(function(){
+        $(".clicktoggle").click(function(){
+            $(".toggletotal").slideToggle("slow");
+        })
+
+        $(".update").click(function () {
+            $("#bg").css({
+                display: "block", height: $(document).height()
+            });
+            var $box = $('.box');
+            $box.css({
+                top: "20%",
+                display: "block"
+            });
+        });
+        $(".cancel").click(function () {
+            $("#bg,.box,.box2").css("display", "none");
+            $(".errormsg").html("");
+            $(".inputcost").css("border-color","");
+            $(".inputcost").val("");
+        });
+
+    })
+</script>
+</html>
