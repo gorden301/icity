@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <script type="text/javascript" src="jquery-1.12.0.min.js"></script>
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        form, ul, li, p {
+            list-style: none;
+            display: block;
+            vertical-align: top;
+        }
+
+        a {
+            color: #333;
+            cursor: pointer;
+            outline: none;
+            text-decoration: none;
+        }
+        .header{
+            top: 0;
+            padding-top: 10px;
+            border-bottom: 1px solid rgb(223, 219, 219);
+            width: 100%;
+            height:30px;
+            position: fixed;
+        }
+        .header span{
+            text-align: center;
+            display: inline-block;
+            width: 32%;
+            height: 100%;
+        }
+        .borderbottom{
+            color: rgb(0, 110, 255);
+            border-bottom: 2px solid rgb(0, 110, 255);
+        }
+        .usermsg{
+            color: white;
+            background-color: rgb(0, 158, 255);
+            margin-top: 60px;
+            position: relative;
+             top: 10px;
+            width: 100%;
+            height: 50px;
+            padding: 20px 0px;
+        }
+        .userhead{
+            width: 50px;
+            height: 50px;
+            float: left;
+
+        }
+        .username{
+            display: inline-block;
+            margin-left: 20px;
+        }
+        .qq{
+            margin-top: 8px;
+            margin-left: 70px;
+        }
+        .border div h3{
+            margin-top: 30px;
+        }
+        .border:before{
+            content: "";
+            width: 1px;
+            height: 50px;
+            color: #9E9E9E;
+            background-color: #9E9E9E;
+            position: absolute;
+            top: 30px;
+            left: 48%;
+        }
+
+        .border div{
+            float: left;
+            width:50%;
+            height:100%;
+        }
+        .border2 div{
+            margin-bottom: 50px;
+            float: left;
+            width:50%;
+            height:100%;
+        }
+        .border3 div{
+            margin-bottom: 50px;
+            margin-top: 30px;
+            text-align: center;
+            float: left;
+            width:33%;
+            height:100%;
+        }
+        .datacover{
+            width:100%;
+            height:220px;
+            border-bottom: 1px solid #DADADA;
+        }
+
+        .border{
+            position: relative;
+            width:90%;
+            height:50%;
+            margin: 0 auto;
+            border-bottom: 1px solid #DADADA;
+        }
+        .border2{
+            padding-top: 10px;
+            position: relative;
+            width:99%;
+            height:50px;
+            margin: 0 auto;
+        }
+        .border3{
+            padding-top: 10px;
+            position: relative;
+            width:100%;
+            height:50px;
+            margin: 0 auto;
+        }
+        .usermoney{
+            margin-left: 20px;
+            /*padding-left: 5%;*/
+            width: 95%;
+            margin-top: 40px;
+        }
+        .usermoney h1{
+            padding-bottom: 10px;
+            width: 90%;
+            margin-top: 20px;
+            border-bottom: 1px solid rgb(184, 184, 184);
+        }
+        .border2:before {
+            content: "";
+            width: 1px;
+            height: 40px;
+            color: #9E9E9E;
+            background-color: #9E9E9E;
+            position: absolute;
+            left: 43%;
+        }
+        .before1:before {
+            content: "";
+            width: 1px;
+            height: 40px;
+            color: #9E9E9E;
+            background-color: #9E9E9E;
+            position: absolute;
+            left: 33%;
+        }
+        .before2:before {
+            content: "";
+            width: 1px;
+            height: 40px;
+            color: #9E9E9E;
+            background-color: #9E9E9E;
+            position: absolute;
+            left: 66%;
+        }
+        .daylimitcost{
+            margin-top: 25px;
+            width: 100%;
+            height:80px;
+        }
+        .update{
+            margin-right: 3%;
+            float: right;
+            display: block;
+            width: 60px;
+            height: 28px;
+            margin-top: 8px;
+            background: #fff;
+            border: 1px solid #2196f3;
+            /* border-radius: 10px;*/
+            text-align: center;
+            font-size: 14px;
+            color: #fff;
+            background-color: #2196f3;
+            -webkit-appearance: none
+        }
+        .daycost{
+            margin-left: 5%;
+            margin-top: 15px;
+            float: left;
+        }
+        .costtitle{
+            margin-left: 5%;
+        }
+        .menu{
+            border-top: 1px solid whitesmoke;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height:50px;
+            background-color: whitesmoke;
+        }
+        .menu a{
+            margin-top: 20px;
+            text-align: center;
+            display: inline-block;
+            width: 24%;
+            height: 100%;
+        }
+        .box,.box2{border-radius: 6px;position:absolute;width:96%;height:auto;z-index:100;background-color:#fff;border:1px #ddd solid;padding:1px;margin-left: 1.5%;}
+        .box h2{height:25px;font-size:17px;position:relative;padding-left:10px;line-height:25px;text-align: center;}
+        .box2 h2{height:25px;font-size:17px;position:relative;padding-left:10px;line-height:25px;text-align: center;}
+        .box h2 a{position:absolute;right:5px;font-size:12px;color:#fff;}
+        .box p{text-align: center;color: #ADA9A9;margin-top: 5px;}
+        .box2 p{text-align: center;color: #ADA9A9;margin-top: 5px;}
+        #bg{
+            background-color: #666;
+            position: absolute;
+            z-index: 99;
+            left: 0;
+            top: 0;
+            display: none;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+        }
+        .inputcost {
+            padding-left: 10px;
+            font-size: 14px;
+            width: 91%;
+            height: 30px;
+        }
+        .cancel {
+            color: grey;
+            font-size: 16px;
+            width: 40%;
+            height: 35px;
+            background-color: transparent;
+            border: none;
+            border: 1px solid #DADADA;
+            background-color: #E7E7E7;
+        }
+        .confirm, .confirm2 {
+            color: white;
+            font-size: 16px;
+            width: 40%;
+            height: 35px;
+            background-color: transparent;
+            border: none;
+            border: 1px solid #2196f3;
+            background-color: #2196f3;
+        }
+        .buttongroup {
+            margin-bottom: 10px;
+            width: 100%;
+            margin-top: 25px;
+            text-align: center;
+        }
+        .errormsg {
+            color: red;
+            margin-left: 3%;
+            margin-top: 3px;
+            display: none;
+        }
+        .inputdiv {
+            width: 100%;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="bg"></div>
+<div class="box2" style="display:none">
+    <h2>修改日限额</h2>
+    <p>是否将账户日限额调整至</p>
+    <p class="changed" style="color: rgb(27, 187, 216);"></p>
+    <div class="buttongroup">
+        <button class="cancel">取消</button>
+        <button class="confirm2">确定</button>
+    </div>
+</div>
+<div class="box" style="display:none">
+    <h2>修改日限额</h2>
+    <p>当前账户日限额<span class="limitdaycost2"></span>元/天</p>
+    <p>每次修改幅度≥50元</p>
+    <div class="inputdiv"><input type="text" placeholder="输入金额" class="inputcost"><span>元</span></div>
+    <span class="errormsg">lalalalala</span>
+    <div class="buttongroup">
+        <button class="cancel">取消</button>
+        <button class="confirm">确定</button>
+    </div>
+</div>
+    <div class="header">
+        <span id="myaccount">我的账户</span>
+        <span id="costrecord">消费记录</span>
+        <span id="payrecord">充值记录</span>
+    </div>
+    <div class="usermsg">
+        <img src="#" class="userhead">
+        <p class="username">北京网罗天下生活科</p>
+        <p style="margin-top: 8px;" class="qq">QQ:2948291010</p>
+    </div>
+    <div class="datacover">
+        <div class="border">
+            <div class="">
+                <h3 class="">0</h3>
+                <p>曝光量(次)</p>
+            </div>
+            <div>
+                <h3 class="">0</h3>
+                <p>点击量(次)</p>
+            </div>
+
+        </div>
+        <div class="border">
+            <div>
+                <h3 class="">0</h3>
+                <p>今日消费(元)</p>
+            </div>
+            <div>
+                <h3 class="">0</h3>
+                <p>cpc(元)</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="usermoney">
+        <h4>￥账户总额(元)</h4>
+        <h1 class="total">0.00</h1>
+        <div class="border2">
+            <div>
+                <h3 class="cash">0.00</h3>
+                <p>现金账户(元)</p>
+            </div>
+            <div>
+                <h3 class="virtual">0.00</h3>
+                <p>虚拟账户(元)</p>
+            </div>
+        </div>
+    </div>
+    <div class="daylimitcost">
+        <p class="costtitle">日限额(元)</p>
+        <p>
+            <span class="daycost">￥10,100元</span>
+            <input type="button" value="修改" class="update">
+        </p>
+    </div>
+    <div class="border3">
+        <p style="margin-left: 5%">广告统计</p>
+        <div class="before1">
+            <h3 class="pending">0</h3>
+            <p>待审核</p>
+        </div>
+        <div class="before2">
+            <h3 class="denied">3</h3>
+            <p>未通过</p>
+        </div>
+        <div>
+            <h3 class="affected">0</h3>
+            <p>有效广告</p>
+        </div>
+    </div>
+    <div class="menu">
+        <a style="color: rgb(30, 120, 223);" href="shouye.html">首页</a>
+        <a href="effect.html">效果</a>
+        <a href="index.html">计划</a>
+        <a href="advertisement.html">广告</a>
+    </div>
+</body>
+<script>
+    $(function(){
+
+        $("#payrecord").click(function(){
+            debugger;
+            $(".header").siblings().hide();
+            $(".menu").show();
+        })
+        $("#costrecord").click(function(){
+            $(".header").siblings().hide();
+            $(".menu").show();
+        })
+        $("#myaccount").click(function(){
+            $(".header").siblings().show();
+            $("#bg").hide();
+            $(".box,.box2").hide();
+//            $(".menu").show();
+        })
+        $(".update").click(function () {
+            $("#bg").css({
+                display: "block", height: $(document).height()
+            });
+            var $box = $('.box');
+            $box.css({
+                top: "50%",
+                display: "block"
+            });
+        });
+        //点击关闭按钮的时候，遮罩层关闭
+        $(".cancel").click(function () {
+            $("#bg,.box,.box2").css("display", "none");
+            $(".errormsg").html("");
+            $(".inputcost").css("border-color","");
+            $(".inputcost").val("");
+        });
+        $(".confirm").click(function () {
+            if ($(".inputcost").val() == "") {
+                $(".errormsg").html("日限额有效值为50-4,000,000元");
+                $(".errormsg").show();
+                $(".inputcost").css("border-color","red");
+                return false;
+            } else {
+                var minus = Math.abs($(".inputcost").val() - $(".limitdaycost2").html());
+                if (minus < 50) {
+                    $(".errormsg").html("最小修改幅度必须大于等于50元");
+                    $(".errormsg").show();
+                    $(".inputcost").css("border-color","red");
+                    return false;
+                }
+            }
+            $(".box").css("display", "none");
+            var box2 = $(".box2");
+            box2.css({
+                top: "50%",
+                display: "block"
+            });
+            $(".changed").html("￥"+$(".inputcost").val()+"元");
+        });
+        var data;
+        $(".usermsg").click(function(){
+            var email = data.info.contact_person_email;
+            var mobile = data.info.contact_person_mobile;
+            var id = data.info.industry_id;
+            var name = data.info.uname;
+            var qq = data.info.contact_person_qq;
+            var corporation = data.info.corporation;
+            window.location.href = encodeURI("usercenter.html?email=" + email +"&mobile=" + mobile + "&id=" + id + "&name=" + name +"&qq=" + qq +"&corporation="+corporation);
+        })
+
+        $("#myaccount").addClass("borderbottom");
+        $(".header span").click(function(){
+            $(this).addClass("borderbottom");
+            $(this).siblings().removeClass("borderbottom");
+        })
+        var userdetail = $.get('http://account.yizhihudie.com/gdtapi/admin/advertiser/getuserdetail').success(function (response) {
+            userdetail = null;
+            if (response.status == 1) {
+                data = response;
+                $(".qq").html("QQ:"+response.info.contact_person_qq);
+                $(".username").html(response.info.corporation);
+
+            }
+        });
+
+        var useraccount = $.get('http://account.yizhihudie.com/gdtapi/admin/account/getuseraccount').success(function (response) {
+            useraccount = null;
+            if (response.status == 1) {
+                $(".total").html(response.info.balance_total + ".00");
+                $(".cash").html(response.info.balance_cash + ".00");
+                $(".virtual").html(response.info.balance_virtual + ".00");
+            }
+        });
+
+        var adgroup = $.get('http://account.yizhihudie.com/gdtapi/admin/adgroup/getadgroupstatistic').success(function (response) {
+            adgroup = null;
+            if (response.status == 1) {
+                $(".denied").html(response.info.denied);
+                $(".affected").html(response.info.affected);
+                $(".pending").html(response.info.pending);
+            }
+        });
+    })
+</script>
+</html>
